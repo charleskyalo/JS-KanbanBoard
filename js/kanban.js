@@ -57,13 +57,11 @@ document.querySelectorAll('.drop').forEach(element => {
   element.addEventListener('drop', (event) => {
     event.preventDefault();
     const id = event.dataTransfer.getData('text');
-    document.getElementById(event.target).appendChild(id);
+    event.target.appendChild(document.getElementById(id))
   });
 
   element.addEventListener('dragover', (event) => {
     event.preventDefault();
-    const id = event.dataTransfer.getData('text');
-    document.getElementById(event.target).appendChild(id);
   });
 
 
