@@ -19,13 +19,13 @@ const create_item = () => {
   const item = document.createElement('div');
   item.classList.add('item');
   item.id = 'item-' + order;
-  /* item.draggable = true; */
-  item.setAttribute('draggable', true);
-  item.addEventListener('dragstart', (event) => {
-    return event.target.id.DataTranfer.setData('text')
+  item.draggable = true;
+
+  item.addEventListener('dragstart', event => {
+    return event.dataTransfer.setData('text', event.target.id)
   })
-  item.addEventListener('dragend', (event) => {
-    return event.target.id.clearData();
+  item.addEventListener('dragend', event => {
+    return event.dataTransfer.clearData();
   })
 
 
@@ -33,11 +33,11 @@ const create_item = () => {
   item.appendChild(input);
 
 
-  const save_btn = document.querySelector('button');
+  const save_btn = document.createElement('button');
   save_btn.innerHTML = "Save";
   save_btn.addEventListener('click', () => {
     error.innerHTML = "";
-    if (value !== "") {
+    if (input.value != "") {
       order += 1;
       item.innerHTML = input.value;
       adding = false;
@@ -54,15 +54,15 @@ const create_item = () => {
 
 
 document.querySelectorAll('.drop').forEach(element => {
-  element.addListener('drop', (event) => {
+  element.addEventListener('drop', (event) => {
     event.preventDefault();
-    const id = event.target.DataTransfer.getData('text');
+    const id = event.dataTransfer.getData('text');
     document.getElementById(event.target).appendChild(id);
   });
 
-  element.addListener('dragover', (event) => {
+  element.addEventListener('dragover', (event) => {
     event.preventDefault();
-    const id = event.target.DataTransfer.getData('text');
+    const id = event.dataTransfer.getData('text');
     document.getElementById(event.target).appendChild(id);
   });
 
